@@ -33,7 +33,7 @@ export default class ModalDropdown extends Component {
     defaultIndex: PropTypes.number,
     defaultValue: PropTypes.string,
     options: PropTypes.array,
-
+    buttonText: PropTypes.string,
     accessible: PropTypes.bool,
     animated: PropTypes.bool,
     showsVerticalScrollIndicator: PropTypes.bool,
@@ -79,7 +79,9 @@ export default class ModalDropdown extends Component {
       accessible: !!props.accessible,
       loading: props.options === null || props.options === undefined,
       showDropdown: false,
-      buttonText: props.defaultValue,
+      
+      
+      : props.defaultValue,
       selectedIndex: props.defaultIndex
     };
   }
@@ -167,7 +169,7 @@ export default class ModalDropdown extends Component {
             <View style={styles.button}>
               <Text style={[styles.buttonText, this.props.textStyle]}
                     numberOfLines={1}>
-                {this.state.buttonText}
+                {this.props.buttonText ? this.props.buttonText : this.state.buttonText}
               </Text>
             </View>
           )
@@ -226,7 +228,9 @@ export default class ModalDropdown extends Component {
     };
 
     if (showInLeft) {
-      style.left = this._buttonFrame.x;
+      style.top = 115;
+      style.right = 30;
+//       style.left = this._buttonFrame.x;
     } else {
       const dropdownWidth = (this.props.dropdownStyle && StyleSheet.flatten(this.props.dropdownStyle).width) ||
         (this.props.style && StyleSheet.flatten(this.props.style).width) || -1;
